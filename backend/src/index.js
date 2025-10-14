@@ -24,6 +24,11 @@ app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Health check endpoint at root and /api/health
+app.get('/', (req, res) => {
+  res.json({ status: 'ok', service: 'backend', timestamp: new Date().toISOString() });
+});
+
 // Routes
 app.use('/api/complaints', complaintsRouter);
 app.use('/api/users', usersRouter);

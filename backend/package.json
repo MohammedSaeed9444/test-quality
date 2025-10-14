@@ -8,7 +8,8 @@
     "dev": "nodemon src/index.js",
     "test": "jest",
     "build": "prisma generate",
-    "postinstall": "prisma generate"
+    "postinstall": "prisma generate",
+    "preview": "node src/index.js"
   },
   "dependencies": {
     "@prisma/client": "^5.5.2",

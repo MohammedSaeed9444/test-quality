@@ -1,6 +1,5 @@
 [build]
 builder = "nixpacks"
-dockerfilePath = "./Dockerfile"
 
 [deploy]
 startCommand = "sh start.sh"
@@ -11,20 +10,19 @@ restartPolicyType = "on_failure"
 [env]
 NODE_ENV = "production"
 
+# Service specific configurations
 [[services]]
-name = "backend"
-dockerfile = "./backend/Dockerfile"
 internal_port = 3000
 envs = [
   "DATABASE_URL",
   "JWT_SECRET",
-  "CORS_ORIGIN"
+  "CORS_ORIGIN",
+  "PORT"
 ]
 
 [[services]]
-name = "frontend"
-dockerfile = "./frontend/Dockerfile"
 internal_port = 5173
 envs = [
-  "VITE_API_URL"
+  "VITE_API_URL",
+  "PORT"
 ]

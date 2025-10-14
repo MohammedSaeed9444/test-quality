@@ -3,20 +3,32 @@
 # Exit on error
 set -e
 
-# Check if this is a backend or frontend deployment
-if [ -f "backend/package.json" ]; then
+# Function to start backend
+start_backend() {
     echo "Starting backend service..."
     cd backend
     npm install
+    npx prisma generate
     npm run build
     npm start
-elif [ -f "frontend/package.json" ]; then
+}
+
+# Function to start frontend
+start_frontend() {
     echo "Starting frontend service..."
     cd frontend
     npm install
     npm run build
     npm start
+}
+
+# Determine which service to start based on PORT
+# Railway assigns different ports to different services
+if [ "$PORT" = "3000" ]; then
+    start_backend
+elif [ "$PORT" = "5173" ]; then
+    start_frontend
 else
-    echo "Error: Neither backend nor frontend package.json found"
+    echo "Error: Invalid PORT specified"
     exit 1
 fi

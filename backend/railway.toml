@@ -10,3 +10,11 @@ restartPolicyType = "on_failure"
 
 [env]
 NODE_ENV = "production"
+
+[[services]]
+name = "backend"
+internal_port = 3000
+envs = [
+  "PORT=3000",
+  # plus your other needed envs like DATABASE_URL, JWT_SECRET, CORS_ORIGIN, etc.
+]
